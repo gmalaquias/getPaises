@@ -162,6 +162,26 @@ namespace getPaises
                         d.imgMapa = "";
                     }
 
+                    try
+                    {
+                        driver.Navigate().GoToUrl("http://pt.knoema.com/atlas/" + d.nome.Replace(" ", "+") + "/%C3%8Dndice-de-Desenvolvimento-Humano");
+                        d.idh = driver.FindElementByXPath("//*[@id=\"indicator\"]/div/span[1]").Text;
+                    }
+                    catch
+                    {
+                        d.idh = "0";
+                    }
+
+                    try
+                    {
+                        driver.Navigate().GoToUrl("http://pt.knoema.com/atlas/" + d.nome.Replace(" ", "+") + "/Rankins-Global-de-Competitividade");
+                        d.ranking = driver.FindElementByXPath("//*[@id=\"indicator\"]/div/span[1]").Text;
+                    }
+                    catch
+                    {
+                        d.ranking = "0";
+                    }
+
                     dados.Add(d);
                 }
 
@@ -211,6 +231,10 @@ namespace getPaises
         public string facilicade_negocios_ano { get; set; }
 
         public string imgMapa { get; set; }
+
+        public string idh { get; set; }
+
+        public string ranking { get; set; }
 
     }
 
